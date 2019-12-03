@@ -1,0 +1,28 @@
+plugins {
+    id 'scala'
+}
+
+group 'nl.getthere.dataunit'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'org.scala-lang:scala-library:2.11.12'
+
+    implementation 'org.apache.spark:spark-core_2.11:2.4.3'
+    implementation 'org.apache.spark:spark-sql_2.11:2.4.3'
+
+    implementation 'com.microsoft.azure:azure-eventhubs-spark_2.11:2.3.12'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.4.2'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.4.2'
+}
+
+test {
+    useJUnitPlatform()
+}
