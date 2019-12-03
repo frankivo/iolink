@@ -1,7 +1,13 @@
 package nl.getthere.dataunit.iolink
 
+import org.apache.spark.sql.expressions.UserDefinedFunction
+
 trait Hextract {
+  // Get data
   def extract(hex: String): Int
+
+  // Get spark udf
+  def getUdf: UserDefinedFunction
 }
 
 // Converts hex data to int

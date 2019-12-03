@@ -39,7 +39,7 @@ object IoLinkReader {
 
       .select(from_json(col("body").cast(StringType), schema).as("col"))
       .select("col.*")
-      .withColumn("distance", dist_udf(col("data")))
+      .withColumn("distance", iolink.Distance.getUdf(col("data")))
       .withColumn("timestamp", from_unixtime(col("time") / 1000))
       .drop("time")
       .drop("data")
