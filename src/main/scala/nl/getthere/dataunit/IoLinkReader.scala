@@ -1,5 +1,6 @@
 package nl.getthere.dataunit
 
+import nl.getthere.dataunit.iolink.Distance
 import org.apache.spark.eventhubs.{EventHubsConf, EventPosition}
 import org.apache.spark.sql.functions.{col, from_json, from_unixtime, udf}
 import org.apache.spark.sql.types.{IntegerType, LongType, StringType, StructType}
@@ -28,7 +29,7 @@ object IoLinkReader {
       .add("port", IntegerType)
       .add("data", StringType)
 
-    val dist_udf = udf((data: String) => distance(data))
+    val dist_udf = udf((data: String) => Distance.extract(data))
 
     spark
       .readStream
@@ -49,14 +50,6 @@ object IoLinkReader {
       })
       .start
       .awaitTermination
-  }
-
-  def distance(hex: String): Int = {
-    val i = Integer.parseInt(hex, 16)
-    val bin = i.toBinaryString
-    val pad = bin.reverse.padTo(12, "0").mkString.reverse
-    val sub = pad.slice(0, 8)
-    Integer.parseInt(sub.toString, 2)
   }
 
 }
