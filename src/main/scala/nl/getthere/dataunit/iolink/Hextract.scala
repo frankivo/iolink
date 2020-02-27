@@ -4,7 +4,7 @@ import org.apache.spark.sql.expressions.UserDefinedFunction
 
 trait Hextract {
   // Get data
-  def extract(hex: String): Int
+  def extract(hex: String): Any
 
   // Get spark udf
   def getUdf: UserDefinedFunction
