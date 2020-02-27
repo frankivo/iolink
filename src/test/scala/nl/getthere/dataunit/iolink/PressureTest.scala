@@ -5,6 +5,11 @@ import org.junit.jupiter.api.Test
 
 class PressureTest {
   @Test
+  def testRound() : Unit = {
+    assertEquals(13.37, Pressure.round(13.373847))
+  }
+
+  @Test
   def testPressure688(): Unit = {
     val data = "0AC0"
     val expected = 6.88
